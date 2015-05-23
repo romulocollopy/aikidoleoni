@@ -1,0 +1,8 @@
+{
+  "name": "CirculoDeAikido",
+  "version": "0.1",
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.3"
+  }
+}

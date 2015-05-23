@@ -1,0 +1,27 @@
+<!-- compressed tags is created by Django Pipeline.  -->
+{% load pipeline %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}Circulo de Aikido Luc Leoni{% endblock title %}
+    </title>
+    
+    <!-- Include CSS files -->
+    {% stylesheet 'libraries' %}
+    <!-- ... -->
+
+</head>
+<body>
+    {% block content %}
+    <h1>Home</h1>
+    <p class="desciption">Bem vindo ao Círculo de Aikido Luc Leoni</p>
+    {% endblock content %}
+
+<!-- Include JavaScript files -->
+{% javascript 'libraries' %}
+
+</body>
+</html>
