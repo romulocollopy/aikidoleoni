@@ -25,8 +25,6 @@ SECRET_KEY = 'nhjo-08fvc#7#rkyc^4(11!oabktzti#wn-crh2s5y)djrvfmk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-PIPELINE_ENABLED = True
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -40,8 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
-    'aikidoleoni',
-    'core',
+    'aikidoleoni.core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,6 +75,7 @@ WSGI_APPLICATION = 'aikidoleoni.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -135,4 +133,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = str(PROJECT_DIR / 'aikidoleoni/static')
+STATIC_ROOT = str(PROJECT_DIR / 'static')

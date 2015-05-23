@@ -53,7 +53,10 @@ coverage.xml
 docs/_build/
 
 # Project specific
-
-aikidoleoni/static/
-
 env/
+
+# Bower Components
+bower_components
+
+# Vagrant
+.vagrant/

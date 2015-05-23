@@ -4,5 +4,5 @@ from aikidoleoni import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('core.urls', namespace='core')),
+    url(r'^$', include('aikidoleoni.core.urls', namespace='core')),
 ]
