@@ -115,6 +115,7 @@ PIPELINE_JS = {
 
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -133,4 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = str(PROJECT_DIR / 'static')
+STATIC_ROOT = str(PROJECT_DIR.parent / 'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(PROJECT_DIR.parent / 'media')
+
