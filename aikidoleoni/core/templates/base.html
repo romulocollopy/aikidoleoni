@@ -1,4 +1,5 @@
 {% load pipeline %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,22 +12,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-	<title>
+    <title>
         {% block title %}Circulo de Aikido Luc Leoni{% endblock title %}
-	</title>
+    </title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <!-- Bootstrap and theme css -->
+    {% stylesheet 'libraries' %}
 
     <!-- Custom Fonts -->
+
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-	{% stylesheet 'libraries' %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,108 +48,103 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+				<a class="navbar-brand" href="{% url 'core:home' %}">Home</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
+            {% block menu %}
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    {% for item in menu %}
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="{% url 'pages:single_page' item.id %}">Home</a>
+                    </li>
+                    {% empty %}
+                    <!-- <li> -->
+						<!-- <a href="{# {% url 'core:calendar' %} #}">Calendário</a> -->
+                    <!-- </li> -->
+                    <li>
+                        <a href="{% url 'core:about' %}">Sobre nós</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+						<a href="{% url 'core:about_aikido' %}">Sobre o Aikido</a>
                     </li>
                     <li>
-                        <a href="post.html">Sample Post</a>
+                        <a href="{% url 'blog:posts_list' %}">Publicações</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="{% url 'core:contact' %}">Entre em contato</a>
                     </li>
+                    {% endfor %}
                 </ul>
             </div>
+            {% endblock menu %}
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
 
     <!-- Page Header -->
+    {% block header %}
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('{% static 'core/img/home-bg.jpg' %}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-						<h1>{{ titulo }}{% if not titulo %}Circulo de Aikido Luc Leoni{% endif %}</h1>
+                        <h1>Circulo de Aikido Luc Leoni</h1>
                         <hr class="small">
-                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                        <span class="subheading">Tradição, filosofia e marcialidade.</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    {% endblock header %}
 
     <!-- Main Content -->
     {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% for post in posts %}
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a href="{% url 'blog:single_post' post.id %}">
                         <h2 class="post-title">
-                            Man must explore, and this is exploration at its greatest
+                            {{ post.title }}
                         </h2>
                         <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
+                            {{ post.subtitle }}
                         </h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
+                    <p class="post-meta">Publicado por <a href="#">{{ post.author }}</a> em {{ post.publish_date }}</p>
                 </div>
                 <hr>
+                {% empty %}
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-                        </h2>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2014</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Science has not yet mastered prophecy
+                            Seja bem-vindo ao site do Circulo de Aikido Luc Leoni
                         </h2>
                         <h3 class="post-subtitle">
-                            We predict too much for the next year and yet far too little for the next ten.
+                            Em breve traremos notícias sobre as atividades de nossos dojos filiados.
                         </h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2014</p>
+                    <p class="post-meta">Publicado por <a href="#">Luc Leoni</a> em Post Inaugural</p>
                 </div>
                 <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Failure is not an option
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on July 8, 2014</p>
-                </div>
-                <hr>
+                {% endfor %}
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
+						<a href="{% url 'blog:posts_list' %}">Mais antigos &rarr;</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-	{% endblock content %}
+    {% endblock content %}
     <hr>
 
     <!-- Footer -->
@@ -159,48 +152,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
+                    <div class="vcard">
+                        <p class="fn"><a class="url" href="https://plus.google.com/114714195602686701455">Luc Leoni</a></p>
+                        <ul class="adr">
+                            <li class="region">Rio de Janeiro</span></li>
+                            <li class="postal-code">20000-000</span></li>
+                            <li class="country-name">Brasil</li>
+                        </ul>
+                        <ul class="contact">
+                            <li><a href="mailto:sensei&#64aikidoleoni.org">sensei&#64aikidoleoni.org</a></li>
+                            <li class="tel">+55 (21)9999 9999</li>
+                        </ul>
+                    </div>
+                    <p class="copyright text-muted">Copyright &copy; Circulo de Aikido Luc Leoni 2015</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="js/clean-blog.min.js"></script>
-
-	{% javascript 'libraries' %}
+    <!-- jQuery, Bootstrap and theme js -->
+    {% javascript 'libraries' %}
 
 </body>
 

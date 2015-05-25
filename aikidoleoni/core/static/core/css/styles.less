@@ -1,0 +1,41 @@
+.vcard {
+	font-size: 14px;
+	color: #999;
+	display: block;
+	position: relative;
+	margin: 0 auto;
+	width: 600px;
+	min-height: 20px;
+	p {
+		margin: 2px;
+		padding: 0px;
+		float: left;
+	}
+
+	a { text-decoration: none; }
+	.fn {
+		display: none;
+		a { text-decoration: underline;}
+	}
+	.floating {
+		list-style: none;
+		li { float: left; padding-right: 10px; border-right: 1px solid; margin-left: 10px; width: auto;}
+	}
+	.adr{
+		float: left;
+		width: auto;
+		.floating;
+		.region { }
+		.postal-code { display: none; .region}
+		.coutry-name {}
+	}
+	.contact {
+		float: left;
+		margin: 0;
+		padding: 0;
+		width: auto;
+		height: auto;
+		.floating;
+		.tel { float: left; padding-right: 5px; border-right: 0px; margin: 0 5px;}
+	}
+}

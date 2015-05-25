@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'pipeline',
     'aikidoleoni.core',
+    'aikidoleoni.blog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,7 +89,7 @@ DATABASES = {
 }
 
 STATICFILES_DIRS = (
-  str(PROJECT_DIR/'bower_components'),
+  str(PROJECT_DIR /'bower_components'),
 )
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
@@ -98,12 +99,16 @@ STATICFILES_FINDERS = (
     'pipeline.finders.AppDirectoriesFinder',
     'pipeline.finders.CachedFileFinder',
     'pipeline.finders.PipelineFinder',
+    # 'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
 PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
-          'bower_components/bootstrap/dist/css/bootstrap.css',
+            'bootstrap/dist/css/bootstrap.css',
+            'core/css/clean_blog.css',
+            'core/css/styles.less',
         ),
         'output_filename': 'css/libraries.min.css',
         'extra_context': {
@@ -115,7 +120,9 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
-          'bower_components/jquery/dist/jquery.js',
+            'jquery/dist/jquery.js',
+            'bootstrap/dist/js/bootstrap.js'
+            'core/js/clean_blog.js'
         ),
         'output_filename': 'js/libraries.min.js',
     }
@@ -123,6 +130,11 @@ PIPELINE_JS = {
 
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
+
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.less.LessCompiler',
+    'pipeline.compilers.coffee.CoffeeScriptCompiler',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

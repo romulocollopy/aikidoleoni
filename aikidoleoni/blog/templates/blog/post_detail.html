@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+    <!-- Page Header -->
+    {% block header %}
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('{% static post.image %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Man must explore, and this is exploration at its greatest</h1>
+                        <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                        <span class="meta">Publicado por <a href="{# {% url 'blog:author' post.author.slug %} #}">{{ post.author }}</a> em {{ post.publish_date }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock header %}
+
+    <!-- Post Content -->
+    {% block content %}
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ post.content }}
+                </div>
+            </div>
+        </div>
+    </article>
+    {% endblock content %}
