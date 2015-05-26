@@ -66,6 +66,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'django.core.context_processors.static',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -158,3 +159,15 @@ STATIC_ROOT = str(PROJECT_DIR.parent / 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(PROJECT_DIR.parent / 'media')
 
+
+import sys
+class DisableMigrations:
+    def __contains__(self, item):
+        return True
+
+    def __getitem__(self, item):
+        return 'notmigrations'
+
+if 'test' in sys.argv:
+    CACHE_MIDDLEWARE_SECONDS = 0
+    MIGRATION_MODULES = DisableMigrations()

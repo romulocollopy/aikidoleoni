@@ -87,14 +87,18 @@
     <!-- Page Header -->
     {% block header %}
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('{% static 'core/img/home-bg.jpg' %}')">
+	{% if page.image %}
+	<header class="intro-header" style="background-image: url('{{ page.image.url }}')">
+	{% else %}
+	<header class="intro-header" style="background-image: url('{% static 'core/img/home-bg.jpg' %}')">
+	{% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Circulo de Aikido Luc Leoni</h1>
+						<h1>{{ page.title }}</h1>
                         <hr class="small">
-                        <span class="subheading">Tradição, filosofia e marcialidade.</span>
+						<span class="subheading">{{ page.description }}</span>
                     </div>
                 </div>
             </div>
@@ -106,10 +110,13 @@
     {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="post-preview">
+					<h3>{{ page.content }}</h3>
+				</div>
                 {% for post in posts %}
                 <div class="post-preview">
-                    <a href="{% url 'blog:single_post' post.id %}">
+					<a href="{# {% url 'blog:single_post' post.id %} #}">
                         <h2 class="post-title">
                             {{ post.title }}
                         </h2>
