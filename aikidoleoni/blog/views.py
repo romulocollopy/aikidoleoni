@@ -7,7 +7,7 @@ def posts_list(request):
     page = get_object_or_404(Page, slug='blog')
     context = dict(
         page=page,
-        posts = Post.objects.all()
+        posts=Post.published_posts.all()
         )
     template = "blog/posts_list.html"
     return render(request, template, context)

@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from datetime import datetime
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
@@ -44,11 +43,6 @@ class Post(models.Model):
 
     objects = models.Manager()
     published_posts = PostManager()
-
-    def is_scheduled(self):
-        if (self.publish_date > datetime.now() and self.published):
-            return True
-        return False
 
     def save(self, *args, **kwargs):
         if not self.content:
