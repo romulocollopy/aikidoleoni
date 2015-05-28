@@ -4,14 +4,17 @@
     <!-- Page Header -->
     {% block header %}
     <!-- Set your background image for this header on the line below. -->
+    {% if post.image %}
     <header class="intro-header" style="background-image: url('{% static post.image %}')">
+    {% else %}
+    <header class="intro-header" style="background-image: url('{% static 'core/img/home-bg.jpg' %}')">
+    {% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
                         <h1>{{ post.title }}</h1>
                         <h2 class="subheading">{{ post.subtitle }}</h2>
-                        <span class="meta">Publicado por <a href="{# {% url 'blog:author' post.author.slug %} #}">{{ post.author }}</a> em {{ post.publish_date }}</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +28,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    {{ post.content }}
+                    {{ post.content | safe }}
+                    <span class="meta">Publicado por <a href="{# {% url 'blog:author' post.author.slug %} #}">{{ post.author }}</a> em {{ post.publish_date }}</span>
                 </div>
             </div>
         </div>

@@ -116,7 +116,7 @@
 				</div>
                 {% for post in posts %}
                 <div class="post-preview">
-					<a href="{# {% url 'blog:single_post' post.id %} #}">
+					<a href="{# {% url 'blog:post_detail' post.id %} #}">
                         <h2 class="post-title">
                             {{ post.title }}
                         </h2>
