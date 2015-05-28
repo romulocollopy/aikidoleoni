@@ -9,3 +9,4 @@ class PostManager(models.Manager):
             published=True,
             publish_date__lte=timezone.now()
             )
+        return qs
