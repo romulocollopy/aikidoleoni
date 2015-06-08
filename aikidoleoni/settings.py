@@ -100,7 +100,7 @@ STATICFILES_FINDERS = (
     'pipeline.finders.AppDirectoriesFinder',
     'pipeline.finders.CachedFileFinder',
     'pipeline.finders.PipelineFinder',
-    # 'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
@@ -122,7 +122,7 @@ PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
             'jquery/dist/jquery.js',
-            'bootstrap/dist/js/bootstrap.js'
+            'bootstrap/dist/js/bootstrap.js',
             'core/js/clean_blog.js'
         ),
         'output_filename': 'js/libraries.min.js',
