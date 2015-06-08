@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import sys
 from pathlib import Path
 
 PROJECT_DIR = Path(__file__).parents[1]
@@ -41,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
+    'ckeditor',
     'aikidoleoni.core',
     'aikidoleoni.blog',
 )
@@ -140,9 +142,9 @@ PIPELINE_COMPILERS = (
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -160,14 +162,29 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = str(PROJECT_DIR.parent / 'media')
 
 
-import sys
 class DisableMigrations:
+
     def __contains__(self, item):
         return True
 
     def __getitem__(self, item):
         return 'notmigrations'
 
+
 if 'test' in sys.argv:
     CACHE_MIDDLEWARE_SECONDS = 0
     MIGRATION_MODULES = DisableMigrations()
+
+
+def gen_html():
+    return (
+        """<h1>WOW</h1>
+        <p>Look here, thas a Rich HTML content</p>
+        <p>Bye, now.</p>"""
+        )
+
+MOMMY_CUSTOM_FIELDS_GEN = {
+    'ckeditor.fields.RichTextField': gen_html,
+    }
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

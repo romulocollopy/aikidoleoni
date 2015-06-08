@@ -7,7 +7,7 @@ def home(request):
     page = get_object_or_404(Page, slug='home')
     context = dict(
         page=page,
-        posts=[Post()]*3
+        posts=Post.published_posts.all()[:3],
     )
     return render(request, template, context)
 
