@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'aikidoleoni.wsgi.application'
 DATABASES = {
     'default': config(
         'DATABASE_URL',
-        default='sqlite:///' + str(PROJECT_DIR / 'db.sqlite3'),
+        default='sqlite:///'+ str(PROJECT_DIR / 'db.sqlite3'),
         cast=db_url
     )
 }
@@ -190,3 +190,10 @@ MOMMY_CUSTOM_FIELDS_GEN = {
     }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+EMAIL_HOST=config('EMAIL_HOST', default='localhost')
+EMAIL_PORT=config('EMAIL_PORT', default=45, cast=int)
+EMAIL_HOST_USER=config('EMAIL_HOST_USER', default='root')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD', default='root')
+EMAIL_USE_SSL=config('EMAIL_USE_SSL', default=False, cast=bool)
+
