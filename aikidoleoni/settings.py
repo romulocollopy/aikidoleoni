@@ -196,4 +196,5 @@ EMAIL_PORT=config('EMAIL_PORT', default=45, cast=int)
 EMAIL_HOST_USER=config('EMAIL_HOST_USER', default='root')
 EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD', default='root')
 EMAIL_USE_SSL=config('EMAIL_USE_SSL', default=False, cast=bool)
-
+DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL', default='root@localhost') 
+EMAIL_SUBJECT_PREFIX=config('EMAIL_SUBJECT_PREFIX', default='[site-cal]')

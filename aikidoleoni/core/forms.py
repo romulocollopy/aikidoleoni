@@ -12,17 +12,13 @@ class ContactForm(forms.Form):
     def send_mail(self):
         email = {}
         email['from'] = self.cleaned_data.get('email')
-        email['subject'] = self.cleaned_data.get('subject')
+        email['subject'] = '[site-cal] ' + self.cleaned_data.get('subject')
         email['phone'] = self.cleaned_data.get('phone')
         email['message'] = self.cleaned_data.get('message')
-        email['name'] = self.cleaned_data.get('message')
+        email['name'] = self.cleaned_data.get('name')
         html_message = render_to_string('email/contact.html', email)
         return send_mail(
-            email['subject'], email['message'], email['from'], ['contato@aikidoleoni.org'],
-            html_message=html_message, fail_silently=True
+            email['subject'], email['message'], 'application@aikidoleoni.org',
+            ['contato@aikidoleoni.org'], html_message=html_message,
+            fail_silently=False
         )
-
-
-
-
-
