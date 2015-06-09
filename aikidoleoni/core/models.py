@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
 
-# Create your models here.
 class Page(models.Model):
     title = models.CharField(_('Titulo'), max_length=140)
     slug = models.SlugField(unique=True)

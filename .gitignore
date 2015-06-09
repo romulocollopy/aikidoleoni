@@ -60,3 +60,4 @@ bower_components
 
 # Vagrant
 .vagrant/
+settings.ini

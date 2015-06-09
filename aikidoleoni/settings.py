@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import sys
 from pathlib import Path
 from decouple import config, Csv
+from dj_database_url import parse as db_url
 
 PROJECT_DIR = Path(__file__).parents[1]
 
@@ -84,12 +85,12 @@ WSGI_APPLICATION = 'aikidoleoni.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(PROJECT_DIR / 'db.sqlite3'),
-    }
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///' + str(PROJECT_DIR / 'db.sqlite3'),
+        cast=db_url
+    )
 }
 
 STATICFILES_DIRS = (
