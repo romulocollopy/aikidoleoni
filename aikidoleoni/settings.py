@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import sys
 from pathlib import Path
+from decouple import config, Csv
 
 PROJECT_DIR = Path(__file__).parents[1]
 
@@ -21,15 +22,15 @@ PROJECT_DIR = Path(__file__).parents[1]
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nhjo-08fvc#7#rkyc^4(11!oabktzti#wn-crh2s5y)djrvfmk'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='*')
 
 ADMINS = (
-    ('R6', 'romulocollopy@gmail.com'),
+    ('Rômulo Collopy', 'romulocollopy@gmail.com'),
     )
 
 # Application definition
@@ -156,10 +157,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = str(PROJECT_DIR.parent / 'static')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = str(PROJECT_DIR.parent / 'media')
+STATIC_URL = config('STATIC_URL', default='/static/')
+STATIC_ROOT = config('STATIC_ROOT', default=str(PROJECT_DIR.parent / 'static'))
+MEDIA_URL = config('MEDIA_URL', default='/media/')
+MEDIA_ROOT = config('MEDIA_ROOT', default=str(PROJECT_DIR.parent / 'media'))
 
 
 class DisableMigrations:
